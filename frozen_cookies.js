@@ -11,14 +11,14 @@ var scriptElement = document.getElementById('frozenCookieScript') !== null ?
     document.getElementById('modscript_frozen_cookies');
 var baseUrl = scriptElement !== null ?
     scriptElement.getAttribute('src').replace(/\/frozen_cookies\.js$/, '') :
-    'https://mtarnuhal.github.io/FrozenCookies/';
+    'https://iiskullsii.github.io/FrozenCookies/';
 var FrozenCookies = {
     'baseUrl': baseUrl,
     'branch': '',
     'version': '1.10.0'
 };
 
-var protocoll = typeof Steam !== 'undefined' ? 'https' : '';
+var protocoll = typeof Steam !== 'undefined' ? 'https:' : '';
 
 // Load external libraries
 var script_list = [
@@ -77,7 +77,7 @@ function loadScript(id) {
 function fcInit() {
     var jquery = document.createElement('script');
     jquery.setAttribute('type', 'text/javascript');
-    jquery.setAttribute('src', '//ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js');
+    jquery.setAttribute('src', protocoll + '//ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js');
     jquery.onload = function () {
         loadScript(0);
     };

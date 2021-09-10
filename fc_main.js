@@ -11,6 +11,13 @@
     });
 })(this);
 
+Object.prototype.map = function(callbackFn){
+    var id = Object.keys(this);
+    id.forEach(key => {
+        callbackFn(this[key]);
+    });
+}
+
 function registerMod() {    // register with the modding API
     Game.registerMod("Frozen Cookies (mtarnuhal)", {
         init: function () {
@@ -1465,6 +1472,10 @@ function buildingStats(recalculate) {
         }
     }
     return FrozenCookies.caches.buildings;
+}
+
+Object.prototype.map = function(cb){
+
 }
 
 function upgradeStats(recalculate) {

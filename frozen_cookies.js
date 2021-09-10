@@ -18,7 +18,7 @@ var FrozenCookies = {
     'version': '1.10.0'
 };
 
-var protocoll = typeof Steam !== 'undefined' ? '' : 'https';
+var protocoll = typeof Steam !== 'undefined' ? 'https' : '';
 
 // Load external libraries
 var script_list = [

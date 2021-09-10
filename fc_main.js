@@ -11,7 +11,7 @@
     });
 })(this);
 
-Object.prototype.map = function(callbackFn){
+Object.prototype.tmap = function(callbackFn){
     var id = Object.keys(this);
     id.forEach(key => {
         callbackFn(this[key]);
@@ -464,7 +464,7 @@ function copyToClipboard(text) {
 }
 
 function getBuildingSpread() {
-    return Game.ObjectsById.map(function(a) {
+    return Game.ObjectsById.tmap(function(a) {
         return a.amount;
     }).join('/')
 }
@@ -1440,14 +1440,14 @@ function buildingStats(recalculate) {
             if (FrozenCookies.farmLimit && Game.Objects['Farm'].amount >= FrozenCookies.farmMax) {
                 buildingBlacklist.push(2);
             }
-            FrozenCookies.caches.buildings = Game.ObjectsById.map(function (current, index) {
+            FrozenCookies.caches.buildings = Game.ObjectsById.tmap(function (current, index) {
                 if (_.contains(buildingBlacklist, current.id)) {
                     return null;
                 }
                 var currentBank = bestBank(0).cost;
                 var baseCpsOrig = baseCps();
                 var cpsOrig = effectiveCps(Math.min(Game.cookies, currentBank)); // baseCpsOrig + gcPs(cookieValue(Math.min(Game.cookies, currentBank))) + baseClickingCps(FrozenCookies.autoClick * FrozenCookies.cookieClickSpeed);
-                var existingAchievements = Game.AchievementsById.map(function (item, i) {
+                var existingAchievements = Game.AchievementsById.tmap(function (item, i) {
                     return item.won
                 });
                 buildingToggle(current);
@@ -1474,17 +1474,13 @@ function buildingStats(recalculate) {
     return FrozenCookies.caches.buildings;
 }
 
-Object.prototype.map = function(cb){
-
-}
-
 function upgradeStats(recalculate) {
     if (recalculate) {
         if (blacklist[FrozenCookies.blacklist].upgrades === true) {
             FrozenCookies.caches.upgrades = [];
         } else {
             var upgradeBlacklist = blacklist[FrozenCookies.blacklist].upgrades;
-            FrozenCookies.caches.upgrades = Game.UpgradesById.map(function (current) {
+            FrozenCookies.caches.upgrades = Game.UpgradesById.tmap(function (current) {
                 if (!current.bought) {
                     if (isUnavailable(current, upgradeBlacklist)) {
                         return null;
@@ -1493,7 +1489,7 @@ function upgradeStats(recalculate) {
                     var cost = upgradePrereqCost(current);
                     var baseCpsOrig = baseCps();
                     var cpsOrig = effectiveCps(Math.min(Game.cookies, currentBank));
-                    var existingAchievements = Game.AchievementsById.map(function (item) {
+                    var existingAchievements = Game.AchievementsById.tmap(function (item) {
                         return item.won
                     });
                     var existingWrath = Game.elderWrath;
